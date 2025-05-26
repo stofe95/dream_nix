@@ -1,33 +1,52 @@
+
 {
+  description = "NixOS with WSL and Home Manager";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/master";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ...}: 
-    let
-      lib = nixpkgs.lib;
-      secrets = builtins.fromJSON (builtins.readFile "${self}/secrets.json");
-      username = "chris";
-    in {
-    nixosConfigurations = {
-      nixos = lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit username secrets; };
-        modules = [
-          ./configuration.nix
-          nixos-wsl.nixosModules.default
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit username; }; 
-            home-manager.backupFileExtension = "hm";
-          }
-        ];
-      };
-    };
-  };
+  outputs = { self, nixpkgs, home-manager, flake-utils, ... }: {
+        nixosConfigurations = {
+          desktop = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+	    specialArgs = {
+	      username = "chris";
+	      secrets = builtins.fromJSON (builtins.readFile "${self}/secrets.json");
+	      };
+            modules = [
+              ./hosts/common.nix
+              ./hosts/desktop.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.chris = import ./home/desktop.nix;
+              }
+            ];
+          };
+
+          wsl = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+	      username = "chris";
+	      secrets = builtins.fromJSON (builtins.readFile "${self}/secrets.json");
+	      };
+
+            modules = [
+              ./hosts/common.nix
+              ./hosts/wsl.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.chris = import ./home/wsl.nix;
+              }
+            ];
+          };
+        };
+	};
 }
