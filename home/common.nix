@@ -1,12 +1,12 @@
-{ secrets, username, config, pkgs, ... }:
+{ secrets, config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
 
   home = {
-    username = "${username}";
-    homeDirectory = "/home/${username}";
+    username = "chris";
+    homeDirectory = "/home/${config.home.username}";
     sessionVariables.EDITOR = "nvim";
     packages = with pkgs; [ 
       (python311.withPackages (ps: with ps; [
@@ -72,6 +72,7 @@
           cmp-nvim-lsp
           luasnip
           cmp_luasnip
+	  vimtex
         ];
 
         # Extra Neovim configuration
@@ -161,7 +162,7 @@ EOF
     	expireDuplicatesFirst = true;
 	    ignoreSpace = true;
     	share = true;
-	    path = "/home/${username}/.config/zsh/.zsh_history";
+	    path = "/home/${config.home.username}/.config/zsh/.zsh_history";
       };
       historySubstringSearch.enable = true;
       defaultKeymap = "viins";

@@ -26,12 +26,6 @@
     shell = pkgs.zsh;
   };
 
-  home-manager.users.${username} = {
-    imports = [
-      ./home.nix
-    ];
-  };
-
   environment.pathsToLink = ["/share/zsh"];
 
   environment.shells = [pkgs.zsh];
