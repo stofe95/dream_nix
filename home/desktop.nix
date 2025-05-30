@@ -9,4 +9,26 @@
     firefox
     gimp
   ];
+
+  home.keyboard.options = [ "caps:swapescape" ];
+
+  programs.fuzzel = {
+      enable = true;
+      settings = {
+          main = {
+              font = "JetBrainsMono Nerd Font 10";
+              terminal = "alacritty";
+              width = 50;
+              lines = 10;
+              horizontal-pad = 20;
+              vertical-pad = 20;
+          };
+
+          colors = {
+              background = "282a36ff";
+              text = "f8f8f2ff";
+              selection-text = "f8f8f2ff";
+          };
+      };
+  };
 }

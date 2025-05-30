@@ -11,11 +11,11 @@
 
   imports =
     [
-      ./hosts/hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariable = true;
+#  boot.loader.efi.canTouchEfiVariable = true;
   boot.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -24,7 +24,7 @@
   networking.networkmanager.enable = true;
 
   # Select internationalisation properties.
-  il8n.defaultLocale = "en_CA.UTF-8";
+  i18n.defaultLocale = "en_CA.UTF-8";
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -42,7 +42,7 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    also.support32Bit = true;
+    alsa.support32Bit = true;
   };
 
   services.xserver.displayManager.autoLogin.enable = true;
@@ -56,7 +56,10 @@
   ];
 
   system.stateVersion = "24.11";
-  programs.hyprland.enable = true;
-  programs.hyprland.xwayland.enable = true;
  
+  programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+ };
+
 }
