@@ -8,9 +8,12 @@
   home.packages = with pkgs; [
     firefox
     gimp
+    inkscape
+    zotero
+    obsidian
   ];
 
-  home.keyboard.options = [ "caps:swapescape" ];
+  home.keyboard.options = [ "caps:escape" ];
 
   programs.fuzzel = {
       enable = true;

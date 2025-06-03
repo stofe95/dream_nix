@@ -23,6 +23,7 @@
       pandoc
       zathura
       pyright
+      btop
     ];
     file.".config/nixpkgs/config.nix" = {
       enable = true;
@@ -62,7 +63,7 @@
         enable = true;
         viAlias = true;  # Use `vi` as an alias for `nvim`
         vimAlias = true; # Use `vim` as an alias for `nvim`
-        plugins = with pkgs.vimPlugins; [
+       plugins = with pkgs.vimPlugins; [
           telescope-nvim
           plenary-nvim
           nvim-lspconfig
@@ -72,6 +73,7 @@
           cmp-nvim-lsp
           luasnip
           cmp_luasnip
+          coc-nvim
 	  vimtex
         ];
 
@@ -92,6 +94,8 @@ set termguicolors               " Enable true color support
 set scrolloff=8                 " Keep 8 lines visible when scrolling
 set signcolumn=yes              " Always show the sign column
 let mapleader = " "             " Set the leader
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_method = 'latexmk'
 
 colorscheme gruvbox
 
