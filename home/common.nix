@@ -74,6 +74,7 @@
           luasnip
           cmp_luasnip
           coc-nvim
+	  aerial-nvim
 	  vimtex
         ];
 
@@ -113,6 +114,9 @@ require('nvim-treesitter.configs').setup {
         persist_queries = false,
     },
 }
+
+require("aerial").setup()
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
 local lspconfig = require('lspconfig')
 lspconfig.pyright.setup{}
