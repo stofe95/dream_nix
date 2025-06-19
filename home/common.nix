@@ -17,6 +17,8 @@
       openpyxl
       ]))
       ripgrep
+      zoxide
+      fzf
       nodejs
       texlive.combined.scheme-full
       pkgs.texlivePackages.latexmk
@@ -74,7 +76,7 @@
           cmp-nvim-lsp
           luasnip
           cmp_luasnip
-          coc-nvim
+          cmp-vimtex
 	  aerial-nvim
 	  vimtex
         ];
@@ -139,6 +141,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "vimtex" },
     }),
 })
 
@@ -220,15 +223,24 @@ setw -g mode-keys vi
 bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${pkgs.wl-clipboard}/bin/wl-copy"
       '';
     };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     git = {
       enable = true;
       userName = "stofe95";
       userEmail = "cdedek@gmail.com";
     };
-    taskwarrior = {
+
+    taskwarrior3 = {
       enable = true;
     };
+
   };
+
   home.file.".latexmkrc".text = ''
     $pdf_mode = 1;
     $pdflatex = 'pdflatex -interation=nonstopmode -synctex=1 %O %S';
