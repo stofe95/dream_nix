@@ -63,6 +63,7 @@
         enable = true;
         viAlias = true;  # Use `vi` as an alias for `nvim`
         vimAlias = true; # Use `vim` as an alias for `nvim`
+        extraPackages = [ pkgs.wl-clipboard ];
        plugins = with pkgs.vimPlugins; [
           telescope-nvim
           plenary-nvim
@@ -213,6 +214,10 @@ bind-key y set-window-option synchronize-panes
 
 bind % split-window -h -c "#{pane_current_path}"
 bind '"' split-window -v -c "#{pane_current_path}"
+
+set-option -g set-clipboard on
+setw -g mode-keys vi
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${pkgs.wl-clipboard}/bin/wl-copy"
       '';
     };
     git = {

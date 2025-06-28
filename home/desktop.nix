@@ -11,6 +11,9 @@
     inkscape
     zotero
     obsidian
+    wl-clipboard
+    vlc
+    kicad
   ];
 
   home.keyboard.options = [ "caps:escape" ];

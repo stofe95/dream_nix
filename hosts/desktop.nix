@@ -28,7 +28,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.variant = "";
   services.xserver.xkb.options = "caps:escape";
@@ -37,7 +37,7 @@
   services.printing.enable = true;
 
   #Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -45,8 +45,8 @@
     alsa.support32Bit = true;
   };
 
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "chris";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "chris";
 
   environment.systemPackages = with pkgs; [
     hyprpaper
