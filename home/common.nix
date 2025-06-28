@@ -235,7 +235,7 @@ bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${pkgs.wl-clipboar
       userEmail = "cdedek@gmail.com";
     };
 
-    taskwarrior3 = {
+    taskwarrior = {
       enable = true;
     };
 
