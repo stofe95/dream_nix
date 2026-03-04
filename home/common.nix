@@ -239,6 +239,9 @@ bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${pkgs.wl-clipboar
       enableZshIntegration = true;
     };
 
+    starship = {
+        enable = true;
+    };
     git = {
       enable = true;
       userName = "stofe95";

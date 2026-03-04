@@ -16,7 +16,12 @@
  imports = [
    inputs.nixos-wsl.nixosModules.wsl
   ];
+
  wsl.enable = true;
+ wsl.defaultUser = username;
+ systemd.tmpfiles.rules = [
+    "d /run/user/1000 0700 chris users -"
+  ];
 
  boot.loader.grub.enable = false;
  boot.loader.systemd-boot.enable = false;
