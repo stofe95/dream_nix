@@ -9,13 +9,14 @@
     homeDirectory = "/home/${config.home.username}";
     sessionVariables.EDITOR = "nvim";
     packages = with pkgs; [ 
-      (python311.withPackages (ps: with ps; [
-      matplotlib
-      numpy
-      h5py
-      pandas
-      openpyxl
-      ]))
+#      (python311.withPackages (ps: with ps; [
+#      matplotlib
+#      numpy
+#      h5py
+#      pandas
+#      openpyxl
+#      tables
+#      ]))
       ripgrep
       zoxide
       fzf
@@ -145,6 +146,15 @@ cmp.setup({
     }),
 })
 
+-- Telescope keymaps
+local builtin = require('telescope.builtin')
+
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live Grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find Buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help Tags' })
+
+
 -- Enable LSP capabilities for autocompletion
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.pyright.setup({
@@ -197,9 +207,9 @@ EOF
       extraConfig = ''
 unbind C-b
 
-set-option -g prefix C-space
+set-option -g prefix C-a
 
-bind C-space send-prefix
+bind C-a send-prefix
 
 unbind-key i
 bind-key i next-window

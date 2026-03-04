@@ -56,5 +56,13 @@
             ];
           };
         };
+    homeConfigurations = {
+        wsl = home-manager.lib.homeConfiguration {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            configuration = ./home/wsl.nix;
+            username = "chris";
+            homeDirectory = "/home/chris";
+    };
 	};
+};
 }
